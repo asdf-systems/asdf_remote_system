@@ -26,7 +26,8 @@ Here are the steps you have to carry out:
   host$ qemu -hda img.hdd -hdb data -cdrom systemrescuecd-x86-2.0.0.iso -boot d
 
 3. Extract the CD image
-  qemu$ mount /dev/sda1 /mnt/custom
+  qemu$ mkfs.ext2 /dev/sda
+  qemu$ mount /dev/sda /mnt/custom
   qemu$ sysresccd-custom extract
 
 4. Copy the folder contents to the vm
