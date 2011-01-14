@@ -1,0 +1,20 @@
+function start_msg() {
+	echo "[>] $@"
+}
+
+function success_msg() {
+	echo "[*] $@"
+}
+
+function fail_msg() {
+	echo "[X] $@"
+}
+
+function warning_msg() {
+	echo "[!] $@"
+}
+
+function die() {
+	fail_msg $@
+	exit 1
+}
