@@ -2,10 +2,7 @@
 
 function build_cpio() {
 	echo "[>] Building cpio archive..."
-	(
-		cd files
-		find . | cpio --create > ../data
-	)
+	find ./files ./isoroot | cpio --create > ./data
 	echo "[*] done"
 }
 
@@ -31,15 +28,15 @@ Here are the steps you have to carry out:
   qemu$ sysresccd-custom extract
 
 4. Copy the folder contents to the vm
-  qemu$ cd /mnt/custom/customcd/files
+  qemu$ cd /mnt/custom/customcd
   qemu$ cat /dev/sdb | cpio --extract
 
 5. Build the new CD image
   qemu$ sysresccd-custom squashfs
-  qemu$ sysresccd-custom isogen my_srcd
+  qemu$ sysresccd-custom isogen asdfix
 
 6. Copy the CD image to your host
-  qemu$ scp /mnt/customcd/isofile/*.iso surma@10.221.50.2:~/dev/asdf/asdf_remote_system
+  qemu$ scp /mnt/custom/customcd/isofile/*.iso surma@10.0.2.2:~/dev/asdf/asdf_remote_system
 
 I will now to the one automatic step for you.
 EOF
