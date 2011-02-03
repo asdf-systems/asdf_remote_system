@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /asdf/autorun/common
+. /asdf/common
 cat << EOF
 
 asdf-systems RescueSystem

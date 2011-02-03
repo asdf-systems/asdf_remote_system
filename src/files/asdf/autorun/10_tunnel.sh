@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /asdf/autorun/common
+. /asdf/common
 
 start_msg "Deleting root password"
 passwd -d root || die "failed"

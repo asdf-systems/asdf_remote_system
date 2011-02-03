@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. /asdf/common
+
 start_msg "Configuring X server"
 echo "forcexorg" > /root/xserver.cfg
 success_msg

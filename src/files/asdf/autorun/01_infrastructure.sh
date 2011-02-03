@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /asdf/autorun/common
+. /asdf/common
 
 start_msg "Creating folder infrastructure"
 mkdir -p /var/log/asdf
