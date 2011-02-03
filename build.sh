@@ -2,7 +2,10 @@
 
 function build_cpio() {
 	echo "[>] Building cpio archive..."
-	find ./files ./isoroot | cpio --create > ./data
+	(
+		cd src
+		find ./files ./isoroot | cpio --create > ../data
+	)
 	echo "[*] done"
 }
 

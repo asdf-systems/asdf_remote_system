@@ -1,12 +1,12 @@
 function start_msg() {
-	echo "[>] $@"
+	echo "[>] $@..."
 }
 
 function success_msg() {
-	echo "[*] $@"
+	echo "[*] ${1-done}"
 }
 
-function fail_msg() {
+function error_msg() {
 	echo "[X] $@"
 }
 
@@ -15,6 +15,6 @@ function warning_msg() {
 }
 
 function die() {
-	fail_msg $@
+	error_msg $@
 	exit 1
 }
