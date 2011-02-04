@@ -1,0 +1,4 @@
+Just run build.sh and follow the instructions.
+
+You have to have qemu installed and I highly recommend kvm, it's gonna take
+decades without it.
