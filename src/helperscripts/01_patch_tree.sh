@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. common
+. /mnt/custom/customcd/helperscripts/common
 
 start_msg "Start patchin files"
 cd /mnt/custom/customcd/patches
