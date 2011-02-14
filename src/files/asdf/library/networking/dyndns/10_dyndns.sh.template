@@ -1,0 +1,9 @@
+#!/bin/bash
+
+. /asdf/common
+
+start_msg "Publishing IP address"
+/usr/sbin/ddclient
+success_msg
+
+success_msg 

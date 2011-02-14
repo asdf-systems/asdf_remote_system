@@ -9,4 +9,4 @@ mount /dev/sda /mnt/custom || die "Mounting disk image"
 sysresccd-custom extract || die "Extracting disk image"
 cd /mnt/custom/customcd
 cat /dev/sdb | cpio --extract || die "Extracting patches"
-/mnt/custom/customcd/helperscripts/build.sh || die "Applying patches"
+/mnt/custom/customcd/build.sh || die "Applying patches"

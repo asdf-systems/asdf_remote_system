@@ -14,7 +14,16 @@ function warning_msg() {
 	echo "[!] $@"
 }
 
+function info_msg() {
+	echo "[ ] $@
+}
+
 function die() {
 	error_msg $@
 	exit 1
+}
+
+function prompt() {
+	echo -n "$@ "
+	read INPUT
 }
