@@ -32,7 +32,9 @@ start_msg "Generating server key"
 cat << EOF
 ===-----------
 Again, all values can probably be defaulted
-When the common name is asked, use "server"
+When the common name is asked, use "server".
+Don't use a passphrase.
+Answer "y" to all signing requests.
 [Press Enter to continue]
 EOF
 read
