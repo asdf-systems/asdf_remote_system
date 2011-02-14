@@ -15,7 +15,7 @@ function warning_msg() {
 }
 
 function info_msg() {
-	echo "[ ] $@
+	echo "[ ] $@"
 }
 
 function die() {
