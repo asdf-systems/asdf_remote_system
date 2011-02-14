@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. /asdf/common
+
+start_msg "Starting OpenVPN server"
+openvpn --config /etc/openvpn/{name}/openvpn.conf
+success_msg
