@@ -3,5 +3,6 @@
 . /asdf/common
 
 start_msg "Starting OpenVPN server"
-openvpn --config /etc/openvpn/{name}/openvpn.conf
+openvpn --config /etc/openvpn/{name}/openvpn.conf \
+	--cd /etc/openvpn/{name}
 success_msg

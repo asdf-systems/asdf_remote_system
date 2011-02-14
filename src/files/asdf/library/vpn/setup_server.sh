@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURDIR=/usr/share/openvpn/easy-rsa
+SRCDIR=/usr/share/openvpn/easy-rsa
 
 . /asdf/common
 prompt "Enter the networks name:" || die "Aborted"
@@ -12,7 +12,7 @@ mkdir -p $TARDIR || die "Failed"
 success_msg
 
 start_msg "Cleaning stray files"
-cd $DIR
+cd $SRCDIR
 . ./vars || die "Failed to load default values"
 ./clean-all || die "Failed to clean output directory"
 success_msg
@@ -22,6 +22,7 @@ cat << EOF
 The default values of the following prompts should
 suffice in most cases.
 However, do remember to fill out the "Common Name"
+[Press Enter to continue]
 EOF
 read
 ./build-ca || die "Failed to build certificate authority"
@@ -32,6 +33,7 @@ cat << EOF
 ===-----------
 Again, all values can probably be defaulted
 When the common name is asked, use "server"
+[Press Enter to continue]
 EOF
 read
 ./build-key-server server || die "Failed to generate keys"
@@ -65,10 +67,12 @@ All necessary files were successfully generated:
 		Description: Server key
 		Needed by:   Server
 		Secret:      Yes
+[Press Enter to continue]
 EOF
+read
 
 start_msg "Copying encryption files to the appropriate folder"
-cp $CURDIR/keys/* $TARDIR || die "failed"
+cp $SRCDIR/keys/* $TARDIR || die "failed"
 success_msg
 
 start_msg "Generating config"
@@ -80,5 +84,6 @@ start_msg "Adding OpenVPN to autostart"
 cat /asdf/library/vpn/20_openvpn.sh.template | \
 	sed -r "s!\{name\}!$NAME!g" \
 	> /asdf/autorun/20_openvpn_$NAME.sh
+chmod +x /asdf/autorun/20_openvpn_$NAME.sh
 success_msg
 
