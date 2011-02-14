@@ -40,7 +40,10 @@ Here are the steps you have to carry out:
 2. Run the supplied builder script inside qemu
   qemu$ eval "\$(cat /dev/sdc)"
 
-3. Copy the CD image to your host
+3. Build the iso
+  qemu$ /mnt/custom/customcd/helperscripts/create_iso.sh
+
+4. Copy the CD image to your host
   qemu$ scp /mnt/custom/customcd/isofile/*.iso surma@10.0.2.2:~/dev/asdf/asdf_remote_system
 
 EOF

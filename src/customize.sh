@@ -3,7 +3,7 @@
 cd /mnt/custom/customcd
 . helperscripts/common
 
-for file in helperscripts/*.sh; do
+for file in helperscripts/automatic/*.sh; do
 	start_msg "Running $file"
 	./$file
 done
