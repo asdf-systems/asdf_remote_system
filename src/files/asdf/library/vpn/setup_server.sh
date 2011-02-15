@@ -1,20 +1,22 @@
 #!/bin/bash
 
-SRCDIR=/usr/share/openvpn/easy-rsa
-
 . /asdf/common
+cd /usr/share/openvpn/easy-rsa
 prompt "Enter the networks name:" || die "Aborted"
 NAME=$INPUT
 TARDIR=/etc/openvpn/$NAME
 
 start_msg "Creating configuration folder"
-mkdir -p $TARDIR || die "Failed"
+mkdir -p $TARDIR/keys || die "Failed"
+rm keys
+chmod go-rwx $TARDIR/keys
+touch $TARDIR/keys/index.txt
+echo 01 > $TARDIR/keys/serial
+ln -sf $TARDIR/keys .
 success_msg
 
 start_msg "Cleaning stray files"
-cd $SRCDIR
 . ./vars || die "Failed to load default values"
-./clean-all || die "Failed to clean output directory"
 success_msg
 
 start_msg "Generating server certificate"
@@ -69,13 +71,11 @@ All necessary files were successfully generated:
 		Description: Server key
 		Needed by:   Server
 		Secret:      Yes
+
+All files are in $TARDIR/keys
 [Press Enter to continue]
 EOF
 read
-
-start_msg "Copying encryption files to the appropriate folder"
-cp $SRCDIR/keys/* $TARDIR || die "failed"
-success_msg
 
 start_msg "Generating config"
 cat /asdf/library/vpn/openvpn.conf.template \
@@ -87,5 +87,9 @@ cat /asdf/library/vpn/20_openvpn.sh.template | \
 	sed -r "s!\{name\}!$NAME!g" \
 	> /asdf/autorun/20_openvpn_$NAME.sh
 chmod +x /asdf/autorun/20_openvpn_$NAME.sh
+success_msg
+
+start_msg "Cleaning up"
+rm keys
 success_msg
 
