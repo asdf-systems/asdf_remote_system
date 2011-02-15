@@ -2,7 +2,7 @@
 
 . /asdf/common
 cd /usr/share/openvpn/easy-rsa
-prompt "Enter the networks name:" || die "Aborted"
+prompt "Enter the network's name:" || die "Aborted"
 NAME=$INPUT
 TARDIR=/etc/openvpn/$NAME
 
@@ -78,7 +78,7 @@ EOF
 read
 
 start_msg "Generating config"
-cat /asdf/library/vpn/openvpn.conf.template \
+cat /asdf/library/vpn/openvpn.conf.server.template \
 	> $TARDIR/openvpn.conf
 success_msg
 

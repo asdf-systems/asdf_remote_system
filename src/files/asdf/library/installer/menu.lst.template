@@ -14,7 +14,7 @@ chainloader +1
 
 title Rescue System
 root (hd0,3)
-kernel /sysresc/rescuecd
+kernel /sysresc/rescuecd backstore=alldev
 initrd /sysresc/initram.igz
 
 # vim:ft=conf:
