@@ -31,9 +31,9 @@ mount ${DEV}4 /sysresc || die "Could not mount target device"
 success_msg
 
 start_msg "Copying files"
-mkdir /sysresc/sysresc || die "Could not write on target device"
+mkdir /sysresc/sysrcd || die "Could not write on target device"
 for file in sysrcd.dat sysrcd.md5 isolinux/initram.igz isolinux/rescuecd isolinux/rescue64 isolinux/altker32 isolinux/altker64; do
-	cp -v /livemnt/boot/$file /sysresc/sysresc/ || die "Could not copy $file"
+	cp -v /livemnt/boot/$file /sysresc/sysrcd/ || die "Could not copy $file"
 done
 success_msg
 
@@ -48,6 +48,8 @@ start_msg "Installing bootloader"
 mkdir -p /sysresc/boot/grub
 cp -rv /lib/grub/i386-pc/* /sysresc/boot/grub/ || die "Could not copy bootloader files"
 (echo -e "root ($BIOSDEV,3)\nsetup ($BIOSDEV)\nquit\n" | grub --batch) || die "Failed"
+cat /asdf/library/installer/menu.lst.template \
+	> /boot/grub/menu.lst
 success_msg
 
 start_msg "Unmounting"
