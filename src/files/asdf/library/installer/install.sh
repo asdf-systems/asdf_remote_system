@@ -65,7 +65,7 @@ cat /asdf/library/installer/menu.lst.template \
 success_msg
 
 start_msg "Creating backing store"
-sysresccd-backstore create /sysresc/sysrcd.bs 256
+sysresccd-backstore create /sysresc/sysrcd/sysrcd.bs 256
 success_msg
 
 start_msg "Unmounting"
