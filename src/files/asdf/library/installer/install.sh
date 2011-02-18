@@ -30,9 +30,21 @@ mkdir /sysresc || die "Could not create mountfolder"
 mount ${DEV}4 /sysresc || die "Could not mount target device"
 success_msg
 
+start_msg "Figuring out wether this is a cd or a usb stick"
+	if [ -d isolinux ] ; then
+		KERNEL_SOURCE="isolinux"
+		success_msg "This is a cd"
+	elif [ -d syslinux ] ; then
+		KERNEL_SOURCE="syslinux"
+		success_msg "This is a usb stick"
+	else
+		error_msg "This is something fucking weird"
+		die "fatal"
+	fi
+
 start_msg "Copying files"
 mkdir /sysresc/sysrcd || die "Could not write on target device"
-for file in sysrcd.dat sysrcd.md5 isolinux/initram.igz isolinux/rescuecd isolinux/rescue64 isolinux/altker32 isolinux/altker64; do
+for file in sysrcd.dat sysrcd.md5 $KERNEL_SOURCE/initram.igz $KERNEL_SOURCE/rescuecd $KERNEL_SOURCE/rescue64 $KERNEL_SOURCE/altker32 $KERNEL_SOURCE/altker64; do
 	cp -v /livemnt/boot/$file /sysresc/sysrcd/ || die "Could not copy $file"
 done
 success_msg
