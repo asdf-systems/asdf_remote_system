@@ -5,7 +5,7 @@
 # is included with the Grub documentation.
 
 default 0
-timeout 30
+timeout 2
 #splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
 title Windows
@@ -14,7 +14,7 @@ chainloader +1
 
 title Rescue System
 root (hd0,3)
-kernel /sysresc/rescuecd backstore=alldev
-initrd /sysresc/initram.igz
+kernel /sysrcd/rescuecd backstore=alldev subdir=sysrcd
+initrd /sysrcd/initram.igz
 
 # vim:ft=conf:
