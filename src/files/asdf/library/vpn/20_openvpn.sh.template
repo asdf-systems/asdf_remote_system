@@ -3,13 +3,13 @@
 . /asdf/common
 
 start_msg "Starting OpenVPN server"
-mkdir -p /dev/net &>dev/null
+mkdir -p /dev/net &>/dev/null
 mknod /dev/net/tun c 10 200 &>/dev/null
 # --config => Path to config file
 # --cd => Change to dir before initialization
 #	otherwise openvpn doesn't find keyfiles
 # --daemon => Daemonize
 openvpn --config /etc/openvpn/{name}/openvpn.conf \
-	--cd /etc/openvpn/{name} \
+	--cd /etc/openvpn/{name}/keys \
 	--daemon
 success_msg
