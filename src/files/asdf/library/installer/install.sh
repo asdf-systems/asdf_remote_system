@@ -68,6 +68,10 @@ start_msg "Creating backing store"
 sysresccd-backstore create /sysresc/sysrcd/sysrcd.bs 256
 success_msg
 
+start_msg "Copying autorun script"
+cp /livemnt/boot/autorun /sysresc/autorun || die "failed"
+success_msg
+
 start_msg "Unmounting"
 umount /sysresc
 rmdir /sysresc
