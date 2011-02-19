@@ -20,4 +20,5 @@ success_msg
 start_msg "Adding dyndns to autostart"
 cat /asdf/library/networking/dyndns/10_dyndns.sh.template \
 	> /asdf/autorun/10_dyndns.sh
+chmod +x /asdf/autorun/10_dyndns.sh
 success_msg
