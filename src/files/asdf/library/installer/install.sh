@@ -16,7 +16,7 @@ prompt "Enter the device to install to:"
 DEV=$INPUT
 
 start_msg "Adding partition"
-(echo -e "n\np\n4\n\n+500M\nt\n4\nb\nw\n" | fdisk $DEV) || die "failed"
+(echo -e "n\np\n4\n\n+800M\nt\n4\nb\nw\n" | fdisk $DEV) || die "failed"
 blockdev --rereadpt $DEV
 sleep 5
 success_msg
@@ -31,10 +31,10 @@ mount ${DEV}4 /sysresc || die "Could not mount target device"
 success_msg
 
 start_msg "Figuring out wether this is a cd or a usb stick"
-	if [ -d isolinux ] ; then
+	if [ -d /livemnt/boot/isolinux ] ; then
 		KERNEL_SOURCE="isolinux"
 		success_msg "This is a cd"
-	elif [ -d syslinux ] ; then
+	elif [ -d /livemnt/boot/syslinux ] ; then
 		KERNEL_SOURCE="syslinux"
 		success_msg "This is a usb stick"
 	else
@@ -61,7 +61,7 @@ mkdir -p /sysresc/boot/grub
 cp -rv /lib/grub/i386-pc/* /sysresc/boot/grub/ || die "Could not copy bootloader files"
 (echo -e "root ($BIOSDEV,3)\nsetup ($BIOSDEV)\nquit\n" | grub --batch) || die "Failed"
 cat /asdf/library/installer/menu.lst.template \
-	> /boot/grub/menu.lst
+	> /sysrcd/boot/grub/menu.lst
 success_msg
 
 start_msg "Creating backing store"
